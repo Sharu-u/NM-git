@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Change para text</title>
+    </head>
+    <body>
+        <p id="para"> This the original text of the paragraph.</p>
+        <button onclick="changeText()">Change text</button>
+        <script>
+            function changeText(){
+                const paragraph = document.getElementById('para');
+                paragraph.textContent = 'The text has been changed.';
+            }
+        </script>
+    </body>
+</html>

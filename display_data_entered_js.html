@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+    <head><title>Display Data from html form</title></head>
+    <body>
+        <form>
+            Enter Name:
+            <input type="text" id="userName"> 
+            <button type="submit" onclick="display()"> Display Name</button>
+        </form>
+        <h4 id="result"></h4>
+        <script>
+            function display(){
+                var name = document.getElementById('userName').value;
+                document.getElementById("result").innerHTML = "Name:" +name;
+            }
+        </script>
+    </body>
+</html>
