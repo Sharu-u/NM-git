@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Student Registration Portal</title>
+  <title>Student Registration Form</title>
   <style>
     * {
       box-sizing: border-box;
@@ -132,63 +132,86 @@
 </div>
 
 <script>
-  // subtle UX logic (professional behavior)
-
-  // 1. load
   window.addEventListener("load", function () {
     document.getElementById("name").focus();
   });
 
-  // 2. focus
   document.getElementById("name").addEventListener("focus", function () {
     this.style.borderColor = "#1cc88a";
   });
 
-  // 3. blur
   document.getElementById("email").addEventListener("blur", function () {
     if (this.value !== "" && !this.value.includes("@")) {
       this.style.borderColor = "#e74a3b";
+    } else {
+      this.style.borderColor = "#ccc";
     }
   });
 
-  // 4. keydown
-  document.getElementById("roll").addEventListener("keydown", function () {
-    document.getElementById("rollHint").innerText = "Entering roll number";
+  const rollInput = document.getElementById("roll");
+  const rollHint = document.getElementById("rollHint");
+
+  rollInput.addEventListener("keydown", function () {
+    rollHint.innerText = "Entering roll number";
   });
 
-  // 5. keyup
-  document.getElementById("roll").addEventListener("keyup", function () {
+  rollInput.addEventListener("keyup", function () {
     if (this.value.length >= 5) {
-      document.getElementById("rollHint").innerText = "Valid roll number";
+      rollHint.innerText = "Valid roll number";
     }
   });
 
-  // 6. change
+  // 🔹 REMOVE hint when user leaves the input
+  rollInput.addEventListener("blur", function () {
+    rollHint.innerText = "";
+  });
+
   document.getElementById("dept").addEventListener("change", function () {
     this.style.backgroundColor = "#f0f4ff";
   });
 
-  // 7. change
   document.getElementById("year").addEventListener("change", function () {
     this.style.backgroundColor = "#f0f4ff";
   });
 
-  // 8. mouseover
-  document.querySelector("button").addEventListener("mouseover", function () {
+  const button = document.querySelector("button");
+
+  button.addEventListener("mouseover", function () {
     this.innerText = "Submit Registration";
   });
 
-  // 9. mouseout
-  document.querySelector("button").addEventListener("mouseout", function () {
+  button.addEventListener("mouseout", function () {
     this.innerText = "Register Student";
   });
 
-  // 10. submit
   document.getElementById("studentForm").addEventListener("submit", function (e) {
     e.preventDefault();
+
+    const name = document.getElementById("name");
+    const roll = document.getElementById("roll");
+
+    let valid = true;
+
+    if (name.value.trim() === "") {
+      name.style.borderColor = "#e74a3b";
+      valid = false;
+    }
+
+    if (roll.value.trim() === "") {
+      roll.style.borderColor = "#e74a3b";
+      rollHint.innerText = "Roll number is required";
+      valid = false;
+    }
+
+    if (!valid) return;
+
     alert("Student registered successfully");
+
+    this.reset();
+    rollHint.innerText = "";
   });
 </script>
+
 
 </body>
 </html>
